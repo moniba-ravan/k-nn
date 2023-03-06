@@ -23,9 +23,6 @@ class KnnClassifier:
             query = x_test[i]
             neighbors = np.zeros(self.k)
             neighbors = self.find_neighbors(query)
-            print("her;", neighbors)
-            print("2 ", np.bincount(neighbors))
-            print(np.argmax(np.bincount(neighbors)))
             y_predict[i] = np.argmax(np.bincount(neighbors))
 
         return y_predict
