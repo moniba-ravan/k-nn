@@ -21,8 +21,11 @@ class KnnClassifier:
         y_predict = np.zeros(m_test)
         for i in range(m_test):
             query = x_test[i]
-            neighbors = np.zeroes(self.k)
+            neighbors = np.zeros(self.k)
             neighbors = self.find_neighbors(query)
+            print("her;", neighbors)
+            print("2 ", np.bincount(neighbors))
+            print(np.argmax(np.bincount(neighbors)))
             y_predict[i] = np.argmax(np.bincount(neighbors))
 
         return y_predict
@@ -32,7 +35,7 @@ class KnnClassifier:
         for i in range(self.m):
             euclidean_distance[i] = self.euclidean(query, self.x_train[i])
         sorted_inx = euclidean_distance.argsort()
-        sorted_y_train = self.y_train[sorted_inx]
+        sorted_y_train = self.y_train[sorted_inx].flatten()
         return sorted_y_train[:self.k]
 
     @staticmethod
